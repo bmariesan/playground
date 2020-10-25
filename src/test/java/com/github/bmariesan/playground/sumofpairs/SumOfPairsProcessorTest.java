@@ -20,8 +20,10 @@ class SumOfPairsProcessorTest {
     void testOn2ProcessorInvalidNumberOfElementsInArray(List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new On2ComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(5, input);
+
         // then
         assertEquals(0, result);
     }
@@ -32,8 +34,10 @@ class SumOfPairsProcessorTest {
     void testOnProcessorInvalidNumberOfElementsInArray(List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new OnComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(5, input);
+
         // then
         assertEquals(0, result);
     }
@@ -44,8 +48,10 @@ class SumOfPairsProcessorTest {
     void testOn2ProcessorInputArrayContainsDuplicateElements(List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new On2ComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(5, input);
+
         // then
         assertEquals(0, result);
     }
@@ -56,8 +62,10 @@ class SumOfPairsProcessorTest {
     void testOnProcessorInputArrayContainsDuplicateElements(List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new OnComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(5, input);
+
         // then
         assertEquals(0, result);
     }
@@ -68,8 +76,10 @@ class SumOfPairsProcessorTest {
     void testOn2ProcessorValidInputArrayAndSumWithSignedIntegers(int desiredSum, int expectedPairs, List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new On2ComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(desiredSum, input);
+
         // then
         assertEquals(expectedPairs, result);
     }
@@ -80,8 +90,10 @@ class SumOfPairsProcessorTest {
     void testOnProcessorValidInputArrayAndSumWithSignedIntegers(int desiredSum, int expectedPairs, List<Integer> input) {
         // given
         SumOfPairsProcessor processor = new OnComplexitySumOfPairsProcessor();
+
         // when
         int result = processor.processor(desiredSum, input);
+
         // then
         assertEquals(expectedPairs, result);
     }

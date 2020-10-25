@@ -19,9 +19,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+    // Testing dependencies
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.5.15'
 
     // Micrometer Prometheus metrics exporter
     compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.5.5'

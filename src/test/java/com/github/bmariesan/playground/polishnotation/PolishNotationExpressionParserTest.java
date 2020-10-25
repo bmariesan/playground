@@ -17,11 +17,13 @@ class PolishNotationExpressionParserTest {
     @MethodSource("validPolishExpressionsAndResults")
     @DisplayName("valid polish notations should be evaluated")
     public void testValidPolishExpressionsShouldBeEvaluated(String expression, String expectedResult) {
-        //given
+        // given
         PolishNotationExpressionParser polishNotationExpressionParser = new PolishNotationExpressionParser();
-        //when
+
+        // when
         String result = polishNotationExpressionParser.parseAndCalculate(expression);
-        //then
+
+        // then
         assertEquals(expectedResult, result);
     }
 
@@ -29,11 +31,13 @@ class PolishNotationExpressionParserTest {
     @MethodSource("invalidPolishExpressionsAndResults")
     @DisplayName("invalid polish notations should always return error")
     public void testInValidPolishExpressionsShouldReturnError(String expression, String expectedResult) {
-        //given
+        // given
         PolishNotationExpressionParser polishNotationExpressionParser = new PolishNotationExpressionParser();
-        //when
+
+        // when
         String result = polishNotationExpressionParser.parseAndCalculate(expression);
-        //then
+
+        // then
         assertEquals(expectedResult, result);
     }
 
