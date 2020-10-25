@@ -23,7 +23,7 @@ public class PolishNotationExpressionParser {
             return "error";
         }
 
-        List<String> expression = Arrays.asList(expressionLine.split(" "));
+        List<String> expression = Arrays.asList(expressionLine.trim().split(" "));
         Collections.reverse(expression);
 
         Stack<Double> operandStack = new Stack<>();
@@ -34,7 +34,12 @@ public class PolishNotationExpressionParser {
 
             if (isOperator(element) && operandStack.size() > 0) {
                 Operator operator = operatorStrategy.get(element);
-                operandStack.push(operator.calculate(operandStack.pop(), operandStack.pop()));
+                Double leftSideOperand = operandStack.pop();
+                Double rightSideOperand = operandStack.pop();
+                if (isDivisionByZero(operator, rightSideOperand)) {
+                    return "error";
+                }
+                operandStack.push(operator.calculate(leftSideOperand, rightSideOperand));
             } else {
                 operandStack.push(Double.valueOf(element));
             }
@@ -45,6 +50,10 @@ public class PolishNotationExpressionParser {
         }
 
         return "error";
+    }
+
+    public boolean isDivisionByZero(Operator operator, Double rightSideOperand) {
+        return operator instanceof Division && rightSideOperand == 0;
     }
 
     private boolean isOperator(String element) {
