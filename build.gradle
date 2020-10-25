@@ -13,15 +13,21 @@ repositories {
 }
 
 dependencies {
+    // Spring dependencies
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    compile 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+    // Micrometer Prometheus metrics exporter
     compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.5.5'
+
+    // Swagger documentation & UI dependencies
+    compile group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
 }
 

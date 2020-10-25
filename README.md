@@ -83,12 +83,64 @@ Please use the following gradle command to run the PolishNotation Spring Boot ap
 
 `gradlew.bat bootRun` - for Windows
 
-### Sample Input
+### Swagger documentation
 
+Swagger 2.0 API documentation for the built resource can be accessed at http://localhost:8080/swagger-ui/ 
+
+### Sample Input
+Sample request json:
+```
+{
+  "expressions": [
+    "+ 1 1",
+    "/ 1 0",
+    "5 * 5"
+  ]
+}
+```
+
+To use the parallel stream processor you can curl on the `/polish-notations-/parallel-evaluation` endpoint as shown below:
+```
+curl -X POST "http://localhost:8080/polish-notations/parallel-evaluation" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"expressions\": [ \"+ 1 1\", \"/ 1 0\", \"5 * 5\" ]}"
+```
+
+For the sequential stream processor:
+
+```
+curl -X POST "http://localhost:8080/polish-notations/sequential-evaluation" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"expressions\": [ \"+ 1 1\", \"/ 1 0\", \"5 * 5\" ]}"
+```
 ### Sample Output
+The ouput is formed from a list of express - result pairs as seen below:
+```
+[
+  {
+    "expression": "+ 1 1",
+    "result": "2.00"
+  },
+  {
+    "expression": "/ 1 0",
+    "result": "error"
+  },
+  {
+    "expression": "5 * 5",
+    "result": "error"
+  }
+]
+```
 
 ### Implemented features
+* `Spring Boot Actuator` integration to expose health-checks and metrics
+  * http://localhost:8080/actuator/prometheus - for Prometheus style metrics
+  * http://localhost:8080/actuator/health - for Health checks - currently defaulting to standard Spring Boot checks
+  * http://localhost:8080/actuator/metrics - Micrometer style metrics list
+  * http://localhost:8080/actuator/metrics/{metricName} - To see specific metric details E.g. http://localhost:8080/actuator/metrics/system.cpu.usage
+* `Swagger 2 integration` and `Swagger UI` to showcase implemented REST resources
+  * configured to only register classes annotated with `@RestController` 
+* `AspectJ weaving` with `Spring Boot AOP` - Logging as a cross-cutting concern where we want to log debug information about services  
+* `Lazy logging` - the `LoggingService` interface provides a default implementation that lazily logs based on application log LEVEL. A sample SLF4J implementation has been provided.
 
+ 
 ### Running tests
+`./gradlew test` - for Unix based machines
 
-### Disclaimer
+`gradlew.bat test` - for Windows

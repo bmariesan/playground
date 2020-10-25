@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LazyEvaluationLoggerService implements LoggerService {
+public class SLF4JLazyEvaluationLoggerService implements LoggerService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LazyEvaluationLoggerService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SLF4JLazyEvaluationLoggerService.class);
 
     @Override
     public boolean isLogDebugEnabled() {
