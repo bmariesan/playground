@@ -3,7 +3,6 @@ package com.github.bmariesan.playground.resource;
 import com.github.bmariesan.playground.request.PolishNotationEvaluationRequest;
 import com.github.bmariesan.playground.response.PolishNotationEvaluationResponse;
 import com.github.bmariesan.playground.service.PolishNotationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,18 +17,17 @@ public class PolishNotationResource {
 
     private final PolishNotationService polishNotationService;
 
-    @Autowired
     public PolishNotationResource(PolishNotationService polishNotationService) {
         this.polishNotationService = polishNotationService;
     }
 
     @PostMapping("/parallel-evaluation")
-    private ResponseEntity<List<PolishNotationEvaluationResponse>> calculateAllExpressionsInParallel(@RequestBody PolishNotationEvaluationRequest evaluationRequest) {
+    public ResponseEntity<List<PolishNotationEvaluationResponse>> calculateAllExpressionsInParallel(@RequestBody PolishNotationEvaluationRequest evaluationRequest) {
         return ResponseEntity.ok(polishNotationService.parallelParseAndCalculateExpressions(evaluationRequest));
     }
 
     @PostMapping("/sequential-evaluation")
-    private ResponseEntity<List<PolishNotationEvaluationResponse>> calculateAllExpressionsSequentially(@RequestBody PolishNotationEvaluationRequest evaluationRequest) {
+    public ResponseEntity<List<PolishNotationEvaluationResponse>> calculateAllExpressionsSequentially(@RequestBody PolishNotationEvaluationRequest evaluationRequest) {
         return ResponseEntity.ok(polishNotationService.sequentialParseAndCalculateExpressions(evaluationRequest));
     }
 

@@ -1,35 +1,32 @@
 package com.github.bmariesan.playground.logging;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
 @Aspect
+@Component
 public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    //    @Pointcut("within(com.github.bmariesan.playground.resource..*) || " +
-//            "within(com.github.bmariesan.playground.service..*)")
+    @Pointcut("within(com.github.bmariesan.playground.resource..*) || " +
+            "within(com.github.bmariesan.playground.service..*)")
     public void loggingPointcut() {
         // method created to define the pointcut
     }
 
-    @Before("within(com.github.bmariesan.playground.resource..*)")
-    public void logBefore(JoinPoint jp) {
-        logger.debug("JHere");
-    }
-
-    //    @Around("loggingPointcut()")
+    @Around("loggingPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Signature signature = joinPoint.getSignature();
