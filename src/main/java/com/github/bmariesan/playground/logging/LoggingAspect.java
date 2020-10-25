@@ -6,19 +6,21 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 @Aspect
 @Component
 public class LoggingAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
+
+    private final LoggerService logger;
+
+    public LoggingAspect(LoggerService loggerService) {
+        this.logger = loggerService;
+    }
 
     @Pointcut("within(com.github.bmariesan.playground.resource..*) || " +
             "within(com.github.bmariesan.playground.service..*)")
@@ -32,7 +34,7 @@ public class LoggingAspect {
         Signature signature = joinPoint.getSignature();
         Method method = ((MethodSignature) signature).getMethod();
 
-        logDebugMessageLazy(() -> logMethodSignature(joinPoint, signature));
+        logger.debug(() -> logMethodSignature(joinPoint, signature));
 
         // proceed with the call
         Object result = joinPoint.proceed();
@@ -45,15 +47,9 @@ public class LoggingAspect {
             logResult.append(result.toString());
         }
 
-        logDebugMessageLazy(() -> logMethodResult(joinPoint, signature, durationTime, logResult.toString()));
+        logger.debug(() -> logMethodResult(joinPoint, signature, durationTime, logResult.toString()));
 
         return result;
-    }
-
-    private void logDebugMessageLazy(Supplier<String> message) {
-        if (logger.isDebugEnabled()) {
-            logger.debug(message.get());
-        }
     }
 
     private String logMethodResult(ProceedingJoinPoint joinPoint, Signature signature, long durationTime, String logResult) {
