@@ -36,7 +36,7 @@ public class PolishNotationService {
                 .collect(Collectors.toList());
     }
 
-    public PolishNotationEvaluationResponse evaluateAndMapResult(String expression) {
+    private PolishNotationEvaluationResponse evaluateAndMapResult(String expression) {
         return new PolishNotationEvaluationResponse(expression, polishNotationExpressionParser.parseAndCalculate(expression));
     }
 }

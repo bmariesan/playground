@@ -52,7 +52,7 @@ public class PolishNotationExpressionParser {
         return "error";
     }
 
-    public boolean isDivisionByZero(Operator operator, Double rightSideOperand) {
+    private boolean isDivisionByZero(Operator operator, Double rightSideOperand) {
         return operator instanceof Division && rightSideOperand == 0;
     }
 
