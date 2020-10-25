@@ -26,15 +26,17 @@ public class SumOfPairsMain {
         // First algo implementation uses O(n^2) complexity.
         long startTime = System.nanoTime();
         System.out.println("Inefficient algorithm result: " + on2ComplexityProcessor.processor(desiredSum, arrayIntegers));
-        long endTime = System.nanoTime() - startTime;
-        System.out.println("Total execution time O(n^2) complexity in nanoseconds is:" + endTime);
+        long on2EndTime = System.nanoTime() - startTime;
+        System.out.println("Total execution time O(n^2) complexity in nanoseconds is:" + on2EndTime);
 
         startTime = System.nanoTime();
 
         // The algo above can be re-written and reduced to O(n) complexity by using a HashMap to store positioning of elements in array
         System.out.println("Optimised algorithm result: " + onComplexityProcessor.processor(desiredSum, arrayIntegers));
-        endTime = System.nanoTime() - startTime;
-        System.out.println("Total execution time O(n) complexity in nanoseconds is: " + endTime);
+        long onEndTime = System.nanoTime() - startTime;
+        System.out.println("Total execution time O(n) complexity in nanoseconds is: " + onEndTime);
+
+        System.out.println("O(n) algorithm was faster by " + (on2EndTime - onEndTime) + " nanoseconds");
     }
 
     public static List<Integer> readInputData(Scanner scanner) {
@@ -47,7 +49,11 @@ public class SumOfPairsMain {
             }
 
             if (StringUtils.isNotEmpty(line)) {
-                arrayIntegers.add(Integer.parseInt(line));
+                try {
+                    arrayIntegers.add(Integer.parseInt(line));
+                } catch (NumberFormatException exception) {
+                    System.out.println("Non integer values are ignored: " + line);
+                }
             }
         }
         return arrayIntegers;
