@@ -142,7 +142,7 @@ The ouput is formed from a list of express - result pairs as seen below:
   * configured to only register classes annotated with `@RestController` 
 * `AspectJ weaving` with `Spring Boot AOP` - Logging as a cross-cutting concern where we want to log debug information about services  
 * `Lazy logging` - the `LoggingService` interface provides a default implementation that lazily logs based on application log LEVEL. A sample SLF4J implementation has been provided.
-
+* `CI using Github Actions` - https://github.com/bmariesan/playground/actions
  
 ### Running tests
 `./gradlew test` - for Unix based machines
