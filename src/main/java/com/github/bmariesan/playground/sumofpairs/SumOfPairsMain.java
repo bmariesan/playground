@@ -13,6 +13,7 @@ public class SumOfPairsMain {
         SumOfPairsProcessor onComplexityProcessor = new OnComplexitySumOfPairsProcessor();
 
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Top stop type - exit");
         System.out.println("Please enter the desired sum: ");
         int desiredSum = scanner.nextInt();
         System.out.println("Please enter array elements one line at a time: ");

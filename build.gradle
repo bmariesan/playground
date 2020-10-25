@@ -28,3 +28,15 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task sumOfPairs(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "com.github.bmariesan.playground.sumofpairs.SumOfPairsMain"
+    standardInput = System.in
+}
+
+task polishNotations(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "com.github.bmariesan.playground.polishnotation.PolishNotationMain"
+    standardInput = System.in
+}

@@ -13,6 +13,7 @@ public class PolishNotationMain {
         PolishNotationExpressionParser polishNotationExpressionParser = new PolishNotationExpressionParser();
 
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Top stop type - exit");
         System.out.println("Please enter the expressions in polish notation on separate lines");
 
         List<String> polishExpressions = readInputData(scanner);
