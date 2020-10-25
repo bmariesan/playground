@@ -3,6 +3,10 @@
 
 For installation details please check - https://adoptopenjdk.net
 
+
+# Build status
+![Test](https://github.com/bmariesan/playground/workflows/gradle-build-test/badge.svg?branch=main&event=push)
+
 # Running the playground samples
 ## Sum of pairs
 Please use the following gradle command to run the SumOfPairs main class in the project root folder:
