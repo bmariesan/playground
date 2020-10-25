@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.3.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id 'com.adarshr.test-logger' version '2.1.1'
 }
 
 group = 'com.github.bmariesan'
@@ -35,10 +36,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    afterTest { desc, result ->
-        def output = "Class name: ${desc.className}, Test name: ${desc.name},  (Test status: ${result.resultType})"
-        println('\n' + output)
-    }
 }
 
 task sumOfPairs(type: JavaExec) {
