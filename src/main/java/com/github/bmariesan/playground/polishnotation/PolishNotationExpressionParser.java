@@ -41,7 +41,11 @@ public class PolishNotationExpressionParser {
                 }
                 operandStack.push(operator.calculate(leftSideOperand, rightSideOperand));
             } else {
-                operandStack.push(Double.valueOf(element));
+                try {
+                    operandStack.push(Double.valueOf(element));
+                } catch (NumberFormatException e) {
+                    return "error";
+                }
             }
         }
 

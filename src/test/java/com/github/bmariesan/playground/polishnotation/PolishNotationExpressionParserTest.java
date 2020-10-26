@@ -48,7 +48,8 @@ class PolishNotationExpressionParserTest {
                 Arguments.of(null, "error"),
                 Arguments.of("+ 1", "error"),
                 Arguments.of("1 2", "error"),
-                Arguments.of("/ + 1 2 0", "error")
+                Arguments.of("/ + 1 2 0", "error"),
+                Arguments.of("/ x 1 2 0", "error")
         );
     }
 
