@@ -24,6 +24,11 @@ public class PolishNotationExpressionParser {
         }
 
         List<String> expression = Arrays.asList(expressionLine.trim().split(" "));
+
+        if (expression.size() > 100000) {
+            return "error";
+        }
+
         Collections.reverse(expression);
 
         Stack<Double> operandStack = new Stack<>();

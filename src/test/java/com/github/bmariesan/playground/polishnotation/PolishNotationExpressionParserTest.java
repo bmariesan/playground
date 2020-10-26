@@ -1,6 +1,7 @@
 package com.github.bmariesan.playground.polishnotation;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,6 +42,22 @@ class PolishNotationExpressionParserTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    @DisplayName("parsing expressions larger than 100k should return error")
+    public void testParsingExpressionsBiggerThan100kShouldReturnError() {
+        // given
+        String expression = "+ ".repeat(50000) +
+                "1 ".repeat(50000);
+        PolishNotationExpressionParser polishNotationExpressionParser = new PolishNotationExpressionParser();
+
+        // when
+        String result = polishNotationExpressionParser.parseAndCalculate(expression);
+
+        // then
+        assertEquals("error", result);
+
+    }
+
     private static Stream<Arguments> invalidPolishExpressionsAndResults() {
         return Stream.of(
                 Arguments.of("", "error"),
@@ -54,12 +71,15 @@ class PolishNotationExpressionParserTest {
     }
 
     private static Stream<Arguments> validPolishExpressionsAndResults() {
+        String expression = "+ ".repeat(49999) +
+                "1 ".repeat(50000);
         return Stream.of(
                 Arguments.of("+ + 0.5 1.5 * 4 10", "42.00"),
                 Arguments.of("- 2e3 - 700 + 7 * 2 15", "1337.00"),
                 Arguments.of("- -1.5 * 3.1415 / -7 -2", "-12.50"),
                 Arguments.of("100500", "100500.00"),
-                Arguments.of("/ 0 1", "0.00")
+                Arguments.of("/ 0 1", "0.00"),
+                Arguments.of(expression, "50000.00")
         );
     }
 }
