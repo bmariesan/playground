@@ -20,7 +20,7 @@ public interface SumOfPairsProcessor {
         return CollectionUtils.isEmpty(arrayOfIntegers) || arrayOfIntegers.size() < 2;
     }
 
-    default boolean hasDuplicateElements(List<Integer> arrayOfIntegers) {
+    private boolean hasDuplicateElements(List<Integer> arrayOfIntegers) {
         Set<Integer> uniqueElements = new HashSet<>();
         for (Integer element : arrayOfIntegers) {
             if (uniqueElements.contains(element)) {
