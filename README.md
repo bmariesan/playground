@@ -3,6 +3,14 @@
 
 For installation details please check - https://adoptopenjdk.net
 
+# Toolkit
+* Spring Boot 2.3.x
+* Spring AOP
+* Spring Boot Actuator
+* Micrometer
+* Swagger 2.0
+* Java 11
+
 
 # Build status
 ![Test](https://github.com/bmariesan/playground/workflows/gradle-build-test/badge.svg?branch=main&event=push)
