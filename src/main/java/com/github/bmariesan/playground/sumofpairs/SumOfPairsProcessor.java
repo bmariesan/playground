@@ -16,6 +16,8 @@ public interface SumOfPairsProcessor {
         return findPairs(desiredSum, arrayOfIntegers);
     }
 
+    int findPairs(int desiredSum, List<Integer> arrayOfIntegers);
+
     private boolean isInvalidArrayOfIntegers(List<Integer> arrayOfIntegers) {
         return CollectionUtils.isEmpty(arrayOfIntegers) || arrayOfIntegers.size() < 2;
     }
@@ -32,6 +34,4 @@ public interface SumOfPairsProcessor {
 
         return false;
     }
-
-    int findPairs(int desiredSum, List<Integer> arrayOfIntegers);
 }

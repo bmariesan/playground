@@ -16,17 +16,20 @@ public class PolishNotationExpressionParser {
             "-", new Subtraction(),
             "*", new Multiplication(),
             "/", new Division());
+    private static final String ERROR_IN_EXPRESSION_EVALUATION = "error";
+    private static final String DOUBLE_DECIMAL_FORMAT = "%.2f";
+    private static final String EMPTY_SPACE_DELIMITER = " ";
 
     @Timed(value = "parsing.duration")
     public String parseAndCalculate(String expressionLine) {
         if (StringUtils.isEmpty(expressionLine)) {
-            return "error";
+            return ERROR_IN_EXPRESSION_EVALUATION;
         }
 
-        List<String> expression = Arrays.asList(expressionLine.trim().split(" "));
+        List<String> expression = Arrays.asList(expressionLine.trim().split(EMPTY_SPACE_DELIMITER));
 
         if (expression.size() > 100000) {
-            return "error";
+            return ERROR_IN_EXPRESSION_EVALUATION;
         }
 
         Collections.reverse(expression);
@@ -34,7 +37,7 @@ public class PolishNotationExpressionParser {
         Stack<Double> operandStack = new Stack<>();
         for (String element : expression) {
             if (operandStack.size() < 2 && isOperator(element)) {
-                return "error";
+                return ERROR_IN_EXPRESSION_EVALUATION;
             }
 
             if (isOperator(element) && operandStack.size() > 0) {
@@ -42,23 +45,23 @@ public class PolishNotationExpressionParser {
                 Double leftSideOperand = operandStack.pop();
                 Double rightSideOperand = operandStack.pop();
                 if (isDivisionByZero(operator, rightSideOperand)) {
-                    return "error";
+                    return ERROR_IN_EXPRESSION_EVALUATION;
                 }
                 operandStack.push(operator.calculate(leftSideOperand, rightSideOperand));
             } else {
                 try {
                     operandStack.push(Double.valueOf(element));
                 } catch (NumberFormatException e) {
-                    return "error";
+                    return ERROR_IN_EXPRESSION_EVALUATION;
                 }
             }
         }
 
         if (operandStack.size() == 1) {
-            return String.format("%.2f", operandStack.pop());
+            return String.format(DOUBLE_DECIMAL_FORMAT, operandStack.pop());
         }
 
-        return "error";
+        return ERROR_IN_EXPRESSION_EVALUATION;
     }
 
     private boolean isDivisionByZero(Operator operator, Double rightSideOperand) {
